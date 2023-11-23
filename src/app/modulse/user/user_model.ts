@@ -32,7 +32,7 @@ const UserSchema = new Schema<User>({
   email: { type: String, required: [true, 'Email is required'] },
   isActive: { type: Boolean, required: true },
   address: AddressSchema,
-  orders:OrderSchema
+  orders:[OrderSchema]
 
   
   

@@ -45,8 +45,9 @@ const getAllUser= async (req: Request, res: Response) => {
 
 const getSingleUser= async (req: Request, res: Response) => {
   try {
-    const { UserId } = req.params
-    const result = await UserService.getSingleUserDB(UserId)
+    const {userId }= req.params
+    console.log(userId)
+    const result = await UserService.getSingleUserDB(userId)
     res.status(200).json({
       success: true,
       message: 'Single user fetch successfully',
@@ -102,10 +103,41 @@ const deleteUserDB = async (req: Request, res: Response) => {
   }
 }
 
+//  add new order 
+const AddNewOrder = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params
+    const  newOrder  = req.body
+
+    const result = await UserService.AddNewOrder(userId, newOrder)
+     res.status(200).json({
+       success: true,
+       message: ' add new order successfully',
+       data: result,
+     })
+  
+ } catch (error) {
+  res.status(404).json({
+    success: true,
+    message: 'New order added failed',
+    data: error,
+  })
+ }
+  
+  
+}
+
+
+
+
+
+
 export const UserController = {
   createUser,
   getAllUser,
   getSingleUser,
   deleteUserDB,
   UpdateUserDB,
+  AddNewOrder,
+
 }
