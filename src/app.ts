@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from 'express'
 const app: Application = express()
 import cors from 'cors'
-import { StudentRoute } from './app/modulse/student/student.route'
+import { StudentRoute } from './app/modulse/user/user.route'
 
 app.use(express.json())
 app.use(cors())

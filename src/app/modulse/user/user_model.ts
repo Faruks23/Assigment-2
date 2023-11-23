@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import { Gardens, LocalGarden, Student, UserName } from './student.interface'
+import { Gardens, LocalGarden, Student, UserName } from './user.interface'
 
 const UserNameSchema = new Schema<UserName>({
   firstName: { type: String, required: [true, 'First name is required'] },
@@ -36,7 +36,7 @@ const LocalGardenSchema = new Schema<LocalGarden>({
 })
 
 const StudentSchema = new Schema<Student>({
-  id: {type:String ,required:true, unique:true},
+  id: { type: String, required: true, unique: true },
   name: { type: UserNameSchema, required: [true, 'Name is required'] },
   gender: {
     type: String,
@@ -45,7 +45,7 @@ const StudentSchema = new Schema<Student>({
   },
   dateOfBirth: { type: String, required: [true, 'Date of birth is required'] },
   email: { type: String, required: [true, 'Email is required'] },
-  contactNumber: { 
+  contactNumber: {
     type: String,
     required: [true, 'Contact number is required'],
   },
@@ -56,7 +56,7 @@ const StudentSchema = new Schema<Student>({
   },
   presentAddress: {
     type: String,
-    required: [true, 'Present address is required'],  
+    required: [true, 'Present address is required'],
   },
   permanentAddress: {
     type: String,
