@@ -66,17 +66,17 @@ const UpdateUserDB = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params
   const { data } = req.body
-
+   console.log(data,userId,'from postman');
    const result = await UserService.UpdateUserInfo(userId,data)
     res.status(200).json({
       success: true,
-      message: 'Single user fetch successfully',
+      message:'Single user Update successfully',
       data: result,
     })
   } catch (error) {
      res.status(404).json({
      success: false,
-     message: 'Single user fetch  failed',
+     message: 'Single user update  failed',
      data: error,
    })
   }
