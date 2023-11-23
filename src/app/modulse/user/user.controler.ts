@@ -87,7 +87,7 @@ const UpdateUserDB = async (req: Request, res: Response) => {
 const deleteUserDB = async (req: Request, res: Response) => {
   try {
     const { StudentId } = req.params
-    const result = await StudentService.deleteStudentDB(StudentId)
+    const result = await UserService.deleteUserDB(StudentId)
     res.status(200).json({
       success: true,
       message: 'student delete successfully',
