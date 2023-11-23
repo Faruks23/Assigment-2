@@ -1,0 +1,21 @@
+import app from './app'
+import mongoose from 'mongoose'
+import 'dotenv/config'
+
+// const MONGO_URI =
+//   'mongodb+srv://mongoos:mongos123@cluster0.mafpasm.mongodb.net/practice-project?retryWrites=true&w=majority'
+
+const port = process.env.PORT || 5000
+
+async function main() {
+  try {
+    await mongoose.connect(process.env.MONGO_URI as string)
+      console.log("connect to database");
+    app.listen(port, () => {
+      console.log(`Example app listening on port here ${port}`)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+main()
