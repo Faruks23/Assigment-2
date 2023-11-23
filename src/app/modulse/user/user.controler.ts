@@ -90,11 +90,15 @@ const deleteUserDB = async (req: Request, res: Response) => {
     const result = await UserService.deleteUserDB(StudentId)
     res.status(200).json({
       success: true,
-      message: 'student delete successfully',
+      message: 'user delete successfully',
       data: result,
     })
   } catch (error) {
-    console.log(error)
+    res.status(404).json({
+      success: true,
+      message: 'user delete failed',
+      data: error,
+    })
   }
 }
 
