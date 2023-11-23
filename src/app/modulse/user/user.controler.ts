@@ -1,55 +1,90 @@
 import { Request, Response } from 'express'
-import { StudentService } from './user.service'
+import { UserService } from './user.service'
 
-const createStudent = async (req: Request, res: Response) => {
+
+// create a new user 
+const createUser= async (req: Request, res: Response) => {
   try {
-    const { student } = req.body
-    const result = await StudentService.createStudentDB(student)
-    console.log(student, 'form student')
+    const { user } = req.body
+    const result = await UserService.createUserDB(user)
+    console.log(user, 'form student')
     if (result) {
       res.status(200).json({
         success: true,
-        message: 'student created successfully',
+        message: 'User created successfully',
         data: result,
       })
     }
   } catch (error) {
     res.status(404).json({
       success: false,
-      message: 'student created successfully',
+      message: 'user created failed',
       data: error,
     })
   }
 }
 
-const getAllStudent = async (req: Request, res: Response) => {
+// get all user form db
+
+const getAllUser= async (req: Request, res: Response) => {
   try {
-    const result = await StudentService.getAllStudentDB()
+    const result = await UserService.getAllUserDB()
     res.status(200).json({
       success: true,
-      message: 'student created successfully',
+      message: 'User fetched successfully',
       data: result,
     })
   } catch (error) {
-    console.log(error)
+    res.status(404).json({
+      success: true,
+      message: 'user fetched failed',
+      data: error,
+    })
   }
 }
 
-const getSingleStudent = async (req: Request, res: Response) => {
+const getSingleUser= async (req: Request, res: Response) => {
   try {
-    const { StudentId } = req.params
-    const result = await StudentService.getSingleStudentDB(StudentId)
+    const { UserId } = req.params
+    const result = await UserService.getSingleUserDB(UserId)
     res.status(200).json({
       success: true,
-      message: 'student created successfully',
+      message: 'Single user fetch successfully',
       data: result,
     })
   } catch (error) {
-    console.log(error)
+   res.status(404).json({
+     success: false,
+     message: 'Single user fetch  failed',
+     data: error,
+   })
   }
 }
 
-const deleteStudentDB = async (req: Request, res: Response) => {
+
+const UpdateUserDB = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params
+  const { data } = req.body
+
+   const result = await UserService.UpdateUserInfo(userId,data)
+    res.status(200).json({
+      success: true,
+      message: 'Single user fetch successfully',
+      data: result,
+    })
+  } catch (error) {
+     res.status(404).json({
+     success: false,
+     message: 'Single user fetch  failed',
+     data: error,
+   })
+  }
+    
+}
+
+
+const deleteUserDB = async (req: Request, res: Response) => {
   try {
     const { StudentId } = req.params
     const result = await StudentService.deleteStudentDB(StudentId)
@@ -63,9 +98,10 @@ const deleteStudentDB = async (req: Request, res: Response) => {
   }
 }
 
-export const StudentController = {
-  createStudent,
-  getAllStudent,
-  getSingleStudent,
-  deleteStudentDB,
+export const UserController = {
+  createUser,
+  getAllUser,
+  getSingleUser,
+  deleteUserDB,
+  UpdateUserDB,
 }
