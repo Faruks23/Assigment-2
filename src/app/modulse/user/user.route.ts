@@ -7,6 +7,6 @@ router.post('/users', UserController.createUser)
 router.get('/users', UserController.getAllUser)
 router.get('/users/:userId', UserController.getSingleUser)
 router.put('/users/:userId', UserController.getSingleUser)
-router.delete('/:StudentId', UserController.deleteUserDB)
+router.delete('/users/:userId', UserController.deleteUserDB)
 
 export const UserRoute = router;
