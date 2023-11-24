@@ -25,7 +25,7 @@ const OrderSchema = new Schema<Order>({
 
 
 const UserSchema = new Schema<User>({
-  userId: { type: String, required: [true, 'User id is required'], unique:true},
+  userId: { type: Number, required: [true, 'User id is required'], unique:true},
   username: { type: String, required: [true, 'User id is required'] },
   fullName: UserNameSchema,
   age: { type: Number, required: [true, 'Age is required'] },

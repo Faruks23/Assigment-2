@@ -57,6 +57,28 @@ const AddNewOrder = async (userId: string, orderData: Order) => {
   return result
 }
 
+// const getOrderList = async( userId:string )=> {
+//   try {
+//     const result = await UserModal.findOne({ userId: userId })
+//     const order =  result?.orders;
+//     return order
+//   } catch (error) {
+//     console.error('Error fetching orders:', error)
+//     throw error
+//   }
+// }
+const getOrderList = async (userId:string) => {
+  try {
+    const result = await UserModal.findOne({ userId: userId }).select('orders')
+    return result?.orders
+  } catch (error) {
+    console.error('Error fetching orders:', error)
+    throw error
+  }
+}
+
+
+
 export const UserService = {
   createUserDB,
   getAllUserDB,
@@ -64,4 +86,5 @@ export const UserService = {
   deleteUserDB,
   UpdateUserInfo,
   AddNewOrder,
+  getOrderList,
 }

@@ -113,8 +113,9 @@ const AddNewOrder = async (req: Request, res: Response) => {
      res.status(200).json({
        success: true,
        message: ' add new order successfully',
-       data: result,
+       data: null,
      })
+    console.log(result);
   
  } catch (error) {
   res.status(404).json({
@@ -128,6 +129,31 @@ const AddNewOrder = async (req: Request, res: Response) => {
 }
 
 
+// get order
+
+const getOrder = async (req: Request, res: Response) => { 
+  try {
+    const { userId } = req.params
+    console.log(userId,'from order');
+    const result = await UserService.getOrderList(userId)
+     res.status(200).json({
+       success: true,
+       message: 'Order fetched successfully!',
+       data: {orders:result},
+     })
+    
+    
+  } catch (error) {
+     res.status(404).json({
+       success: true,
+       message: 'New order added failed',
+       data: error,
+     })
+    
+  }
+
+
+}
 
 
 
@@ -139,5 +165,5 @@ export const UserController = {
   deleteUserDB,
   UpdateUserDB,
   AddNewOrder,
-
+  getOrder,
 }
