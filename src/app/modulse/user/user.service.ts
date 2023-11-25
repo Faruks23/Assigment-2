@@ -76,6 +76,35 @@ const getOrderList = async (userId:string) => {
     throw error
   }
 }
+// get total price 
+const getTotalPrice = async (userId: string) => {
+  try {
+    console.log(userId, 'from services')
+    const totalPrice = await UserModal.aggregate([
+      { $match: {userId:userId} },
+      { $unwind: '$orders' },
+      {
+        $group: {
+          _id: null,
+          totalPrice: {
+            $sum: { $multiply: ['$orders.price', '$orders.quantity'] },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          totalPrice: 1,
+        },
+      },
+    ])
+    console.log(totalPrice)
+    return totalPrice
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
 
 
 
@@ -87,4 +116,5 @@ export const UserService = {
   UpdateUserInfo,
   AddNewOrder,
   getOrderList,
+  getTotalPrice,
 }

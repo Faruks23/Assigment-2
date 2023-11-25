@@ -21,7 +21,8 @@ export type Order = {
 
 
 export type User = {
-  userId: number
+  model(arg0: string): unknown
+  userId :number 
   username: string
   fullName: UserName
   age: number

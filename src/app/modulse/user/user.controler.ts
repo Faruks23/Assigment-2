@@ -155,6 +155,30 @@ const getOrder = async (req: Request, res: Response) => {
 
 }
 
+const getTotalPrice = async (req: Request, res: Response) => { 
+  try {
+    const { userId } = req.params
+    console.log(userId,'from order');
+    const result = await UserService.getTotalPrice(userId)
+     res.status(200).json({
+       success: true,
+       message:'Total price calculated successfully!"',
+       data: result,
+     })
+    
+    
+  } catch (error) {
+     res.status(404).json({
+       success: true,
+       message: 'Total price calculated failed!"',
+       data: error,
+     })
+    
+  }
+
+
+}
+
 
 
 
@@ -166,4 +190,5 @@ export const UserController = {
   UpdateUserDB,
   AddNewOrder,
   getOrder,
+  getTotalPrice
 }
